@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende la Estructura en PSeInt</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+
+<body>
+<audio autoplay loop>
+        <source src="Recursos/Musica/Main Theme [The Legend of Zelda] 8-Bit VRC6 (Dn-Famitracker).mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <i class="fas fa-code"></i> PSeInt Pro
+                </a>
+                <nav>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="#estructura"><i class="fas fa-info-circle"></i> ¿Qué es PSeInt?</a></li>
+                        <li><a href="Estructura.html"><i class="fas fa-sitemap"></i> Estructura</a></li>
+                        <li><a href="pseudocodigo.html"><i class="fas fa-code"></i> Pseudocódigo</a></li>
+                        <li><a href="ejemplo.html"><i class="fas fa-play-circle"></i> Ejemplo</a></li>
+                        <li><a href="Registro.html"><i class="fas fa-user-plus"></i> Registro</a></li>
+                    </ul>
+                </nav>
+                <button class="nav-toggle" id="navToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="diagramas">
+        <h2 class="section-title">Diagramas y Flujogramas</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-project-diagram"></i> <!-- Icono añadido -->
+                </div>
+                <h3>Representación Gráfica</h3>
+                <p>Los diagramas de flujo permiten visualizar la lógica de un algoritmo de manera clara y estructurada, facilitando la comprensión del proceso.</p>
+                <p>En PSeInt, puedes crear diagramas de flujo utilizando herramientas integradas que simplifican este proceso.</p>
+                <p>Además, puedes exportar tus diagramas en diferentes formatos para compartirlos fácilmente.</p>
+                <div class="video-container">
+                    <img src="https://blog.qservus.com/wp-content/uploads/2022/10/2-3.png" title="Diagramas de Flujo" allowfullscreen></img>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-shapes"></i> <!-- Icono añadido -->
+                </div>
+                <h3>Símbolos Estándar</h3>
+                <p>Aprende a utilizar los símbolos estándar para crear diagramas de flujo profesionales y comprensibles.</p>
+                <p>Familiarízate con los símbolos más comunes y su significado para mejorar tus habilidades en la creación de diagramas.</p>
+                <p>Consulta la documentación oficial de PSeInt para obtener más información sobre los símbolos y su uso.</p>
+                <p>También puedes encontrar ejemplos prácticos en línea que te ayudarán a comprender mejor cómo utilizar estos símbolos en tus diagramas.</p>
+
+                <iframe width="660" height="315" src="https://www.youtube.com/embed/TtEcsfDZuUY?si=e61L6HRLnY_tcGvS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <ul style="margin-top: 1rem; padding-left: 1rem;">
+                    <li>Óvalo: Inicio/Fin</li>
+                    <li>Rectángulo: Proceso</li>
+                    <li>Rombo: Decisión</li>
+                    <li>Paralelogramo: Entrada/Salida</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva Sección con más información -->
+    <section class="section" id="informacion-adicional">
+        <h2 class="section-title">Más Sobre la Estructura</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-cogs"></i> <!-- Icono añadido -->
+                </div>
+                <h3>Estructura Básica de un Algoritmo</h3>
+                <p>Un algoritmo en PSeInt se representa como una serie de instrucciones ordenadas que definen una solución a un problema. La estructura básica incluye declaraciones, entradas, procesos y salidas.</p>
+                <p>La sintaxis de PSeInt es sencilla y permite a los principiantes enfocarse en la lógica sin preocuparse por detalles complejos de programación.</p>
+                <p>Para comenzar, define el objetivo del algoritmo, identifica las entradas necesarias y describe los pasos para alcanzar la solución.</p>
+                <p>Recuerda que un buen algoritmo debe ser claro, conciso y eficiente. Utiliza comentarios para explicar partes del código y mejorar la legibilidad.</p>
+                <img src="https://dcodingames.com/wp-content/uploads/2016/10/ejtrazadoif1ani.gif" alt="Estrucura Básica de un Algoritmo">
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-sync-alt"></i> <!-- Icono añadido -->
+                </div>
+                <h3>Condiciones y Bucles</h3>
+                <p>Las estructuras de control, como los condicionales (`si`, `según`) y los bucles (`mientras`, `para`), permiten que el algoritmo tome decisiones y repita ciertas operaciones.</p>
+                <p>Estas estructuras son fundamentales para crear algoritmos dinámicos que respondan a diferentes situaciones y entradas.</p>
+                <p>En PSeInt, puedes utilizar condicionales para ejecutar diferentes bloques de código según las condiciones especificadas, y bucles para iterar sobre un conjunto de datos o realizar una acción repetidamente.</p>
+                <p>Por ejemplo, un bucle `mientras` se ejecuta mientras una condición sea verdadera, permitiendo que el algoritmo realice acciones repetitivas hasta que se cumpla una condición de salida.</p>
+                <iframe width="660" height="315" src="https://www.youtube.com/embed/fzds3uncvZY?si=6JYtbS7o0ixKf8Mk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <ul style="margin-top: 1rem; padding-left: 1rem;">
+                    <li>Condicionales: `si`, `sino`, `según`</li>
+                    <li>Bucles: `mientras`, `para`</li>
+                    <li>Funciones: Definición y uso de funciones personalizadas</li>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+    <div class="footer-container">
+        <!-- Sección Logo o texto principal -->
+        <div class="footer-logo">
+            <i class="fas fa-code"></i> <span>PSeInt Pro</span>
+        </div>
+
+        <!-- Sección de Información -->
+        <div class="footer-section">
+            <h3>Información</h3>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Estructura.html">Estructura</a></li>
+                <li><a href="pseudocodigo.html">Pseudocódigo</a></li>
+                <li><a href="ejemplo.html">Ejemplo</a></li>
+                <li><a href="Registro.html">Registro</a></li>
+            </ul>
+        </div>
+
+        <!-- Sección de Contacto -->
+        <div class="footer-section">
+            <h3>Contacta</h3>
+            <p>Quito-Ecuador</p>
+            <p><a href="mailto:cursos.online.pseInt@gmail.com">Correo electrónico: cursos.online.pseInt@gmail.com</a></p>
+        </div>
+
+        <!-- Sección de Redes Sociales -->
+        <div class="footer-section">
+            <h3>Síguenos</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de "volver arriba" -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 -Jonathan Cunguan- Aprende PSeInt | Pedagogía Informática</p
+    </div>
+</footer>
+
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

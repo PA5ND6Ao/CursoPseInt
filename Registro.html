@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inscripción a Curso de Programación</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
   
   <style>
     :root {
@@ -38,29 +43,6 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-    }
-
-    /* Animated background particles */
-    body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url("Recursos/IMG/FVerde.gif") center/cover;
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: repeat;
-    z-index: -2;
-    opacity: 0.8;
-    animation: matrixFlow 20s linear infinite;
-}
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      33% { transform: translateY(-30px) rotate(0.5deg); }
-      66% { transform: translateY(-20px) rotate(-0.5deg); }
     }
 
     /* Floating shapes */
@@ -380,6 +362,163 @@
       transform: translateY(0);
     }
 
+    /* Loading animation */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .loading .submit-btn {
+      background: #6c757d;
+    }
+
+    .loading .submit-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Email configuration modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--bg-card);
+      margin: 5% auto;
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 500px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    .modal-title {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .config-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      margin: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .config-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* PDF template styles */
+    .pdf-template {
+      display: none;
+      background: white;
+      padding: 40px;
+      width: 210mm;
+      min-height: 297mm;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    .pdf-header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 20px;
+    }
+
+    .pdf-logo {
+      width: 60px;
+      height: 60px;
+      background: var(--primary);
+      border-radius: 50%;
+      margin: 0 auto 15px;
+    }
+
+    .pdf-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .pdf-subtitle {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .pdf-section {
+      margin: 20px 0;
+    }
+
+    .pdf-section h3 {
+      font-size: 18px;
+      color: var(--primary);
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+
+    .pdf-field {
+      margin: 10px 0;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .pdf-field strong {
+      min-width: 150px;
+      color: #555;
+    }
+
+    .pdf-footer {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      right: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 15px;
+    }
+
     /* Responsive design */
     @media (max-width: 768px) {
       .container {
@@ -416,35 +555,21 @@
         width: 40px;
         height: 40px;
       }
+
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+      }
     }
 
-    /* Loading animation */
-    .loading {
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .loading .submit-btn {
-      background: #6c757d;
-    }
-
-    .loading .submit-btn::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 20px;
-      height: 20px;
-      margin: -10px 0 0 -10px;
-      border: 2px solid transparent;
-      border-top: 2px solid white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .success-message {
+      background: #d1fae5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin: 1rem 0;
+      text-align: center;
     }
   </style>
 </head>
@@ -459,13 +584,40 @@
   <header class="main-header">
     <div class="header-content">
       <div class="main-title">Formulario de Inscripción</div>
-      <a href="index.html" class="boton-inicio">← Inicio</a>
+      <button onclick="openEmailConfig()" class="boton-inicio">⚙️ Configurar Email</button>
     </div>
   </header>
 
+  <!-- Email Configuration Modal -->
+  <div id="emailModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEmailConfig()">&times;</span>
+      <h2 class="modal-title">Configurar Email</h2>
+      <p>Para enviar PDFs por correo, necesitas configurar EmailJS:</p>
+      <div class="form-group">
+        <label for="emailjs-service">Service ID</label>
+        <input type="text" id="emailjs-service" placeholder="Tu EmailJS Service ID">
+      </div>
+      <div class="form-group">
+        <label for="emailjs-template">Template ID</label>
+        <input type="text" id="emailjs-template" placeholder="Tu EmailJS Template ID">
+      </div>
+      <div class="form-group">
+        <label for="emailjs-user">User ID</label>
+        <input type="text" id="emailjs-user" placeholder="Tu EmailJS User ID">
+      </div>
+      <div class="form-group">
+        <label for="destination-email">Email de destino</label>
+        <input type="email" id="destination-email" placeholder="correo@destino.com">
+      </div>
+      <button class="config-btn" onclick="saveEmailConfig()">Guardar Configuración</button>
+      <button class="config-btn" onclick="testEmail()">Probar Email</button>
+    </div>
+  </div>
+
   <div class="container">
     <div id="registro-formulario">
-      <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Logo programación" class="logo">
+      <div class="logo"></div>
       
       <h2 class="form-title">Únete al Curso de Programación con PSeInt</h2>
 
@@ -537,71 +689,61 @@
         </div>
 
         <button type="button" class="submit-btn" onclick="procesarFormulario()">
-          Inscribirme Ahora
+          Inscribirme y Enviar PDF
         </button>
       </form>
     </div>
   </div>
 
-  <script>
-    // Form processing function
-    function procesarFormulario() {
-      const form = document.getElementById('formulario');
-      const formContainer = document.getElementById('registro-formulario');
-      
-      // Add loading state
-      formContainer.classList.add('loading');
-      
-      // Simulate form processing
-      setTimeout(() => {
-        formContainer.classList.remove('loading');
-        alert('¡Inscripción exitosa! Te contactaremos pronto.');
-        form.reset();
-      }, 2000);
-    }
+  <!-- PDF Template (hidden) -->
+  <div id="pdf-template" class="pdf-template">
+    <div class="pdf-header">
+      <div class="pdf-logo"></div>
+      <h1 class="pdf-title">Inscripción al Curso de Programación</h1>
+      <p class="pdf-subtitle">Formulario de Registro - PSeInt</p>
+    </div>
 
-    // Add smooth animations on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
+    <div class="pdf-section">
+      <h3>Información Personal</h3>
+      <div class="pdf-field">
+        <strong>Nombre:</strong>
+        <span id="pdf-nombre"></span>
+      </div>
+      <div class="pdf-field">
+        <strong>Correo:</strong>
+        <span id="pdf-correo"></span>
+      </div>
+      <div class="pdf-field">
+        <strong>Edad:</strong>
+        <span id="pdf-edad"></span>
+      </div>
+    </div>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
+    <div class="pdf-section">
+      <h3>Información del Curso</h3>
+      <div class="pdf-field">
+        <strong>Lenguaje Favorito:</strong>
+        <span id="pdf-lenguaje"></span>
+      </div>
+      <div class="pdf-field">
+        <strong>Nivel:</strong>
+        <span id="pdf-nivel"></span>
+      </div>
+      <div class="pdf-field">
+        <strong>Preferencia de Trabajo:</strong>
+        <span id="pdf-trabajo"></span>
+      </div>
+    </div>
 
-    // Observe form elements
-    document.addEventListener('DOMContentLoaded', () => {
-      const formGroups = document.querySelectorAll('.form-group');
-      formGroups.forEach((group, index) => {
-        group.style.opacity = '0';
-        group.style.transform = 'translateY(20px)';
-        group.style.transition = 'all 0.6s ease';
-        group.style.transitionDelay = `${index * 0.1}s`;
-        observer.observe(group);
-      });
-    });
+    <div class="pdf-section">
+      <h3>Motivación</h3>
+      <div class="pdf-field">
+        <p id="pdf-comentarios"></p>
+      </div>
+    </div>
 
-    // Add input validation feedback
-    const inputs = document.querySelectorAll('input, select, textarea');
-    inputs.forEach(input => {
-      input.addEventListener('blur', () => {
-        if (input.value.trim() !== '') {
-          input.style.borderColor = '#22c55e';
-        } else if (input.required) {
-          input.style.borderColor = '#ef4444';
-        }
-      });
-      
-      input.addEventListener('focus', () => {
-        input.style.borderColor = '#667eea';
-      });
-    });
-  </script>
-</body>
-</html>
+    <div class="pdf-footer">
+      <p>Fecha de inscripción: <span id="pdf-fecha"></span></p>
+      <p>Este documento confirma tu inscripción al curso de programación con PSeInt</p>
+    </div>
+  </div>
